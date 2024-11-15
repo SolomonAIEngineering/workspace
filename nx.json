@@ -96,5 +96,6 @@
       "outputs": ["{workspaceRoot}/.nyc_output"],
       "inputs": []
     }
-  }
+  },
+  "nxCloudId": "6736dc23e7757bb786a40b6c"
 }

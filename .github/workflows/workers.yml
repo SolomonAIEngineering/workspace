@@ -6,12 +6,22 @@ on:
       - canary
     paths:
       - tools/workers/**
-
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select environment to deploy'
+        type: choice
+        default: stable
+        options:
+          - stable
+          - staging
+          - development
+          - production
 jobs:
   deploy:
     runs-on: ubuntu-latest
     name: Deploy
-    environment: stable
+    environment: ${{ inputs.environment }}
     steps:
       - uses: actions/checkout@v4
       - name: Publish
@@ -21,3 +31,4 @@ jobs:
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
           workingDirectory: 'tools/workers'
           packageManager: 'yarn'
+          environment: ${{ inputs.environment }}
