@@ -15,10 +15,10 @@ const appChannelSchema = z.enum(['stable', 'canary', 'beta', 'internal']);
 type Channel = z.infer<typeof appChannelSchema>;
 
 const appNames = {
-  stable: 'AFFiNE',
-  canary: 'AFFiNE Canary',
-  beta: 'AFFiNE Beta',
-  internal: 'AFFiNE Internal',
+  stable: 'Solomon AI Workspace',
+  canary: 'Solomon AI Workspace Canary',
+  beta: 'Solomon AI Workspace Beta',
+  internal: 'Solomon AI Workspace Internal',
 } satisfies Record<Channel, string>;
 const appName = appNames[BUILD_CONFIG.appBuildType];
 
@@ -26,7 +26,7 @@ const links = [
   {
     href: BUILD_CONFIG.githubUrl,
     icon: <GithubIcon size={20} />,
-    label: 'Star AFFiNE on GitHub',
+    label: 'Star Solomon AI Workspace on GitHub',
   },
   {
     href: BUILD_CONFIG.githubUrl,
@@ -47,12 +47,12 @@ const links = [
 
 export function AboutAFFiNE() {
   return (
-    <div className="flex flex-col h-full gap-3 py-5 px-6 w-full">
+    <div className="flex flex-col w-full h-full gap-3 px-6 py-5">
       <div className="flex items-center">
-        <span className="text-xl font-semibold">About AFFiNE</span>
+        <span className="text-xl font-semibold">About Solomon AI Workspace</span>
       </div>
       <div className="overflow-y-auto space-y-[10px]">
-        <div className="flex flex-col rounded-md border">
+        <div className="flex flex-col border rounded-md">
           {links.map(({ href, icon, label }, index) => (
             <div key={label + index}>
               <a
