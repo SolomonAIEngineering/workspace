@@ -9,6 +9,7 @@ on:
 
 env:
   NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+  DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
 
 permissions:
   contents: 'write'
