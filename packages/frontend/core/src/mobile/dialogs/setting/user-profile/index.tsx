@@ -86,7 +86,7 @@ const UnauthorizedUserProfile = () => {
       onClick={() => setAuthModal({ openModal: true, state: 'signIn' })}
       avatar={<Avatar size={48} rounded={4} />}
       title="Sign up / Sign in"
-      caption="Sync with AFFiNE Cloud"
+      caption="Sync with Solomon Workspace"
     />
   );
 };

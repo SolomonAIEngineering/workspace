@@ -1,5 +1,5 @@
 name: 'Deploy to Cluster'
-description: 'Deploy AFFiNE Cloud to cluster'
+description: 'Deploy Solomon AI Workspace to cluster'
 inputs:
   build-type:
     description: 'Align with App build type, canary|beta|stable|internal'
@@ -20,21 +20,21 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Setup Git short hash
-      shell: bash
-      run: |
-        echo "GIT_SHORT_HASH=$(git rev-parse --short HEAD)" >> "$GITHUB_ENV"
-    - name: 'Auth to cluster'
-      uses: './.github/actions/cluster-auth'
-      with:
-        gcp-project-number: '${{ inputs.gcp-project-number }}'
-        gcp-project-id: '${{ inputs.gcp-project-id }}'
-        service-account: '${{ inputs.service-account }}'
-        cluster-name: '${{ inputs.cluster-name }}'
-        cluster-location: '${{ inputs.cluster-location }}'
+  - name: Setup Git short hash
+    shell: bash
+    run: |
+      echo "GIT_SHORT_HASH=$(git rev-parse --short HEAD)" >> "$GITHUB_ENV"
+  - name: 'Auth to cluster'
+    uses: './.github/actions/cluster-auth'
+    with:
+      gcp-project-number: '${{ inputs.gcp-project-number }}'
+      gcp-project-id: '${{ inputs.gcp-project-id }}'
+      service-account: '${{ inputs.service-account }}'
+      cluster-name: '${{ inputs.cluster-name }}'
+      cluster-location: '${{ inputs.cluster-location }}'
 
-    - name: Deploy
-      shell: bash
-      run: node ./.github/actions/deploy/deploy.mjs
-      env:
-        BUILD_TYPE: '${{ inputs.build-type }}'
+  - name: Deploy
+    shell: bash
+    run: node ./.github/actions/deploy/deploy.mjs
+    env:
+      BUILD_TYPE: '${{ inputs.build-type }}'

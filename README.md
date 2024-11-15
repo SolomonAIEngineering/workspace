@@ -64,7 +64,7 @@ Star us, and you will receive all release notifications from GitHub without any 
 
 **Multimodal AI partner ready to kick in any work**
 
-- Write up professional work report? Turn an outline into expressive and presentable slides? Summary an article into a well-structured mindmap? Sorting your job plan and backlog for tasks? Or... draw and code prototype apps and web pages directly all with one prompt? With you, [AFFiNE AI](https://affine.pro/ai) pushes your creativity to the edge of your imagination,just like [Canvas AI](https://affine.pro/blog/best-canvas-ai) to generate mind map for brainstorming.
+- Write up professional work report? Turn an outline into expressive and presentable slides? Summary an article into a well-structured mindmap? Sorting your job plan and backlog for tasks? Or... draw and code prototype apps and web pages directly all with one prompt? With you, [Solomon](https://affine.pro/ai) pushes your creativity to the edge of your imagination,just like [Canvas AI](https://affine.pro/blog/best-canvas-ai) to generate mind map for brainstorming.
 
 **Local-first & Real-time collaborative**
 
@@ -124,7 +124,7 @@ AFFiNE now provides pre-built [templates](https://affine.pro/templates) from our
 
 ## Blog
 
-Welcome to the AFFiNE blog section! Here, you’ll find the latest insights, tips, and guides on how to maximize your experience with AFFiNE and AFFiNE AI, the leading Canvas AI tool for flexible note-taking and creative organization.
+Welcome to the AFFiNE blog section! Here, you’ll find the latest insights, tips, and guides on how to maximize your experience with AFFiNE and Solomon, the leading Canvas AI tool for flexible note-taking and creative organization.
 
 - [vision board template](https://affine.pro/blog/8-free-printable-vision-board-templates-examples-2023)
 - [itinerary template](https://affine.pro/blog/free-customized-travel-itinerary-planner-templates)

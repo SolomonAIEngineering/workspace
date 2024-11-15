@@ -62,7 +62,7 @@ export const Component = ({
     buildShowcaseWorkspace(
       workspacesService,
       WorkspaceFlavour.AFFINE_CLOUD,
-      'AFFiNE Cloud'
+      'Solomon Workspace'
     )
       .then(({ meta, defaultDocId }) => {
         if (defaultDocId) {

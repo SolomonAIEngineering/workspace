@@ -243,7 +243,7 @@ export class ChatPanelMessages extends WithDisposable(ShadowlessElement) {
               )}
               <div>
                 ${this.isLoading
-                  ? 'AFFiNE AI is loading history...'
+                  ? 'Solomon is loading history...'
                   : 'What can I help you with?'}
               </div>
               ${this._renderAIOnboarding()}
@@ -379,7 +379,7 @@ export class ChatPanelMessages extends WithDisposable(ShadowlessElement) {
               : html`<div class="avatar"></div>`}
           </div>`
         : AffineAvatarIcon}
-      ${isUser ? 'You' : 'AFFiNE AI'}
+      ${isUser ? 'You' : 'Solomon'}
     </div>`;
   }
 

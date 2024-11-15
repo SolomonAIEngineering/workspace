@@ -54,7 +54,7 @@ function getPredefinedAFFiNEConfig(): PreDefinedAFFiNEConfig {
     NODE_ENV,
     AFFINE_ENV,
     serverId: 'some-randome-uuid',
-    serverName: isSelfhosted ? 'Self-Host Cloud' : 'AFFiNE Cloud',
+    serverName: isSelfhosted ? 'Self-Host Cloud' : 'Solomon AI Workspace',
     version: pkg.version,
     type: deploymentType,
     isSelfhosted,
