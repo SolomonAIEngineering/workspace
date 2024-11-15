@@ -11,6 +11,8 @@ inputs:
   #   description: 'Service account'
   cluster-name:
     description: 'Cluster name'
+  cluster-token:
+    description: 'Cluster token'
   # cluster-location:
   #   description: 'Cluster location'
 
@@ -27,7 +29,7 @@ runs:
   - name: Install doctl
     uses: digitalocean/action-doctl@v2
     with:
-      token: ${{ secrets.DIGITALOCEAN_TOKEN }}
+      token: ${{ inputs.cluster-token }}
   - name: Save kubeconfig
     shell: bash
     run: |

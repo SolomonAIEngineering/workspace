@@ -7,6 +7,8 @@ inputs:
   cluster-name:
     description: 'Cluster name'
     default: 'production'
+  cluster-token:
+    description: 'Cluster token'
 
 runs:
   using: 'composite'
@@ -19,7 +21,7 @@ runs:
     uses: './.github/actions/cluster-auth'
     with:
       cluster-name: '${{ inputs.cluster-name }}'
-
+      cluster-token: '${{ inputs.cluster-token }}'
   - name: Deploy
     shell: bash
     run: node ./.github/actions/deploy/deploy.mjs

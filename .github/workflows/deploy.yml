@@ -34,6 +34,7 @@ jobs:
         uses: './.github/actions/cluster-auth'
         with:
           cluster-name: ${{ secrets.PROD_CLUSTER_ID }}
+          cluster-token: ${{ secrets.DIGITALOCEAN_TOKEN }}
       - name: Output previous version
         id: print
         run: |
@@ -82,6 +83,7 @@ jobs:
         with:
           build-type: ${{ github.event.inputs.flavor }}
           cluster-name: ${{ secrets.PROD_CLUSTER_ID }}
+          cluster-token: ${{ secrets.DIGITALOCEAN_TOKEN }}
         env:
           APP_VERSION: ${{ steps.version.outputs.APP_VERSION }}
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
