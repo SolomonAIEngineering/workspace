@@ -42,11 +42,11 @@ app:
       clientSecret: ''
   mailer:
     secretName: 'mailer'
-    host: 'smtp.gmail.com'
+    host: 'smtp.resend.com'
     port: '465'
-    user: ''
+    user: 'resend'
     password: ''
-    sender: 'noreply@toeverything.info'
+    sender: 'noreply@inbox.solomon-ai.app'
   metrics:
     enabled: false
     secretName: 'metrics'

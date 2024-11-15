@@ -23,11 +23,10 @@ const {
   MAILER_PASSWORD,
   AFFINE_GOOGLE_CLIENT_ID,
   AFFINE_GOOGLE_CLIENT_SECRET,
-  CLOUD_SQL_IAM_ACCOUNT,
-  GCLOUD_CONNECTION_NAME,
-  GCLOUD_CLOUD_SQL_INTERNAL_ENDPOINT,
   REDIS_HOST,
   REDIS_PASSWORD,
+  REDIS_PORT,
+  REDIS_USERNAME,
   STRIPE_API_KEY,
   STRIPE_WEBHOOK_KEY,
   STATIC_IP_NAME,
@@ -86,11 +85,12 @@ const createHelmCommand = ({ isDryRun }) => {
           `--set-string global.database.user=${DATABASE_USERNAME}`,
           `--set-string global.database.password=${DATABASE_PASSWORD}`,
           `--set-string global.database.name=${DATABASE_NAME}`,
-          `--set        global.database.gcloud.enabled=true`,
-          `--set-string global.database.gcloud.connectionName="${GCLOUD_CONNECTION_NAME}"`,
-          `--set-string global.database.gcloud.cloudSqlInternal="${GCLOUD_CLOUD_SQL_INTERNAL_ENDPOINT}"`,
-          `--set-string global.redis.host="${REDIS_HOST}"`,
+          `--set-string global.database.port="${DATABASE_PORT}"`,
+          `--set-string global.redis.host="${REDIS_HOST}"`, // redis configurations
+          `--set-string global.redis.port="${REDIS_PORT}"`,
+          `--set-string global.redis.username="${REDIS_USERNAME}"`,
           `--set-string global.redis.password="${REDIS_PASSWORD}"`,
+          `--set        global.redis.enabled=true`,
         ]
       : [];
   const serviceAnnotations =
@@ -99,8 +99,6 @@ const createHelmCommand = ({ isDryRun }) => {
           `--set-json   web.service.annotations=\"{ \\"cloud.google.com/neg\\": \\"{\\\\\\"ingress\\\\\\": true}\\" }\"`,
           `--set-json   graphql.service.annotations=\"{ \\"cloud.google.com/neg\\": \\"{\\\\\\"ingress\\\\\\": true}\\" }\"`,
           `--set-json   sync.service.annotations=\"{ \\"cloud.google.com/neg\\": \\"{\\\\\\"ingress\\\\\\": true}\\" }\"`,
-          `--set-json   cloud-sql-proxy.serviceAccount.annotations=\"{ \\"iam.gke.io/gcp-service-account\\": \\"${CLOUD_SQL_IAM_ACCOUNT}\\" }\"`,
-          `--set-json   cloud-sql-proxy.nodeSelector=\"{ \\"iam.gke.io/gke-metadata-server-enabled\\": \\"true\\" }\"`,
         ]
       : [];
 
