@@ -85,11 +85,7 @@ jobs:
         uses: ./.github/actions/deploy
         with:
           build-type: ${{ github.event.inputs.flavor }}
-          gcp-project-number: ${{ secrets.GCP_PROJECT_NUMBER }}
-          gcp-project-id: ${{ secrets.GCP_PROJECT_ID }}
-          service-account: ${{ secrets.GCP_HELM_DEPLOY_SERVICE_ACCOUNT }}
-          cluster-name: ${{ secrets.GCP_CLUSTER_NAME }}
-          cluster-location: ${{ secrets.GCP_CLUSTER_LOCATION }}
+          cluster-name: ${{ secrets.PROD_CLUSTER_ID }}
         env:
           APP_VERSION: ${{ steps.version.outputs.APP_VERSION }}
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
