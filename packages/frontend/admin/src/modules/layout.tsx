@@ -163,7 +163,7 @@ export const LeftPanel = () => {
           </Button>
         </SheetTrigger>
         <SheetHeader className="hidden">
-          <SheetTitle>AFFiNE</SheetTitle>
+          <SheetTitle>Solomon AI</SheetTitle>
           <SheetDescription>
             Admin panel for managing accounts, AI, config, and settings
           </SheetDescription>
@@ -176,7 +176,7 @@ export const LeftPanel = () => {
               )}
             >
               <Logo />
-              AFFiNE
+              Solomon AI
             </div>
             <Separator />
             <Nav />
@@ -194,7 +194,7 @@ export const LeftPanel = () => {
         )}
       >
         <Logo />
-        AFFiNE
+        Solomon AI
       </div>
       <Separator />
       <Nav />

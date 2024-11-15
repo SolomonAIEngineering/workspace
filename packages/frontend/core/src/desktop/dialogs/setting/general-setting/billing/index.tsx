@@ -588,11 +588,11 @@ const InvoiceLine = ({
 
   const planText =
     invoice.plan === SubscriptionPlan.AI
-      ? 'AFFiNE AI'
+      ? 'Solomon'
       : invoice.plan === SubscriptionPlan.Pro
         ? invoice.recurring === SubscriptionRecurring.Lifetime
-          ? 'AFFiNE Cloud Believer'
-          : 'AFFiNE Cloud'
+          ? 'Solomon Workspace Believer'
+          : 'Solomon Workspace'
         : null;
 
   return (

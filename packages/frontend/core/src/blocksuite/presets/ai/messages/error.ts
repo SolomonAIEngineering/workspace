@@ -94,8 +94,8 @@ export const PaymentRequiredErrorRenderer = (host: EditorHost) => html`
     }
   </style>
   <ai-error-wrapper
-    .text=${html`You've reached the current usage cap for AFFiNE AI. You can
-    subscribe to AFFiNE AI to continue the AI experience!`}
+    .text=${html`You've reached the current usage cap for Solomon. You can
+    subscribe to Solomon to continue the AI experience!`}
   >
     <div
       @click=${() => AIProvider.slots.requestUpgradePlan.emit({ host: host })}
@@ -135,7 +135,7 @@ export function AIChatErrorRenderer(host: EditorHost, error: AIError) {
     return PaymentRequiredErrorRenderer(host);
   } else if (error instanceof UnauthorizedError) {
     return GeneralErrorRenderer({
-      text: html`You need to login to AFFiNE Cloud to continue using AFFiNE AI.`,
+      text: html`You need to login to Solomon Workspace to continue using Solomon.`,
       template: html`<div
         style=${styleMap({
           padding: '4px 12px',

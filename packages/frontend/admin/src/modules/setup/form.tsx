@@ -26,10 +26,10 @@ const Welcome = () => {
       style={{ minHeight: '300px' }}
     >
       <h1 className="text-5xl font-extrabold max-lg:text-3xl max-lg:font-bold">
-        Welcome to AFFiNE
+        Welcome to Solomon AI Workspace
       </h1>
       <p className="mt-5 font-semibold text-xl max-lg:px-4 max-lg:text-lg">
-        Configure your Self Host AFFiNE with a few simple settings.
+        Configure your Self Host Solomon AI Workspace with a few simple settings.
       </p>
     </div>
   );
@@ -45,7 +45,7 @@ const SettingsDone = () => {
         All Settings Done
       </h1>
       <p className="mt-5 font-semibold text-xl max-lg:px-4 max-lg:text-lg">
-        AFFiNE is ready to use.
+        Solomon AI Workspace is ready to use.
       </p>
     </div>
   );
@@ -206,7 +206,7 @@ export const Form = () => {
           </Button>
         )}
         <Button onClick={onNext} disabled={disableContinue}>
-          {current === count ? 'Open AFFiNE' : 'Continue'}
+          {current === count ? 'Open Solomon AI Workspace' : 'Continue'}
         </Button>
       </div>
 

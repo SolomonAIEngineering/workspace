@@ -33,11 +33,7 @@ jobs:
       - name: Auth to Cluster
         uses: './.github/actions/cluster-auth'
         with:
-          gcp-project-number: ${{ secrets.GCP_PROJECT_NUMBER }}
-          gcp-project-id: ${{ secrets.GCP_PROJECT_ID }}
-          service-account: ${{ secrets.GCP_HELM_DEPLOY_SERVICE_ACCOUNT }}
-          cluster-name: ${{ secrets.GCP_CLUSTER_NAME }}
-          cluster-location: ${{ secrets.GCP_CLUSTER_LOCATION }}
+          cluster-name: ${{ secrets.PROD_CLUSTER_ID }}
       - name: Output previous version
         id: print
         run: |
@@ -85,11 +81,7 @@ jobs:
         uses: ./.github/actions/deploy
         with:
           build-type: ${{ github.event.inputs.flavor }}
-          gcp-project-number: ${{ secrets.GCP_PROJECT_NUMBER }}
-          gcp-project-id: ${{ secrets.GCP_PROJECT_ID }}
-          service-account: ${{ secrets.GCP_HELM_DEPLOY_SERVICE_ACCOUNT }}
-          cluster-name: ${{ secrets.GCP_CLUSTER_NAME }}
-          cluster-location: ${{ secrets.GCP_CLUSTER_LOCATION }}
+          cluster-name: ${{ secrets.PROD_CLUSTER_ID }}
         env:
           APP_VERSION: ${{ steps.version.outputs.APP_VERSION }}
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
@@ -112,11 +104,11 @@ jobs:
           DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
           DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
           DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-          GCLOUD_CONNECTION_NAME: ${{ secrets.GCLOUD_CONNECTION_NAME }}
-          GCLOUD_CLOUD_SQL_INTERNAL_ENDPOINT: ${{ secrets.GCLOUD_CLOUD_SQL_INTERNAL_ENDPOINT }}
+          DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
           REDIS_HOST: ${{ secrets.REDIS_HOST }}
           REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
-          CLOUD_SQL_IAM_ACCOUNT: ${{ secrets.CLOUD_SQL_IAM_ACCOUNT }}
+          REDIS_PORT: ${{ secrets.REDIS_PORT }}
+          REDIS_USERNAME: ${{ secrets.REDIS_USERNAME }}
           STRIPE_API_KEY: ${{ secrets.STRIPE_API_KEY }}
           STRIPE_WEBHOOK_KEY: ${{ secrets.STRIPE_WEBHOOK_KEY }}
           STATIC_IP_NAME: ${{ secrets.STATIC_IP_NAME }}

@@ -38,7 +38,7 @@ global:
       accessKeyId: ''
       secretAccessKey: ''
   gke:
-    enabled: true
+    enabled: false
 
 graphql:
   service:

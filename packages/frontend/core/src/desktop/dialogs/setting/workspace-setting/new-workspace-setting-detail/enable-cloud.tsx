@@ -59,7 +59,7 @@ export const EnableCloudPanel = ({
         onClick={confirmEnableCloudAndClose}
         style={{ marginTop: '12px' }}
       >
-        {t['Enable AFFiNE Cloud']()}
+        {t['Enable Solomon Workspace']()}
       </Button>
     </SettingRow>
   );
