@@ -33,11 +33,7 @@ jobs:
       - name: Auth to Cluster
         uses: './.github/actions/cluster-auth'
         with:
-          gcp-project-number: ${{ secrets.GCP_PROJECT_NUMBER }}
-          gcp-project-id: ${{ secrets.GCP_PROJECT_ID }}
-          service-account: ${{ secrets.GCP_HELM_DEPLOY_SERVICE_ACCOUNT }}
-          cluster-name: ${{ secrets.GCP_CLUSTER_NAME }}
-          cluster-location: ${{ secrets.GCP_CLUSTER_LOCATION }}
+          cluster-name: ${{ secrets.PROD_CLUSTER_ID }}
       - name: Output previous version
         id: print
         run: |
