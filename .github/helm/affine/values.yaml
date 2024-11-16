@@ -25,9 +25,9 @@ global:
       proxyPort: '5432'
   redis:
     enabled: true
-    host: 'redis-master'
-    port: '6379'
-    username: ''
+    host: 'solomon-ai-redis-cluster-do-user-14647471-0.b.db.ondigitalocean.com'
+    port: '25061'
+    username: 'default'
     password: ''
     database: 0
   objectStorage:

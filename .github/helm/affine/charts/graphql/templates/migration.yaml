@@ -31,11 +31,11 @@ spec:
                 key: postgres-password
           {{ if not .Values.global.database.gcloud.enabled }}
           - name: DATABASE_URL
-            value: postgres://{{ .Values.global.database.user }}:$(DATABASE_PASSWORD)@{{ .Values.global.database.url }}:{{ .Values.global.database.port }}/{{ .Values.global.database.name }}
+            value: postgresql://{{ .Values.global.database.user }}:$(DATABASE_PASSWORD)@{{ .Values.global.database.url }}:{{ .Values.global.database.port }}/{{ .Values.global.database.name }}
           {{ end }}
           {{ if .Values.global.database.gcloud.enabled }}
           - name: DATABASE_URL
-            value: postgres://{{ .Values.global.database.user }}:$(DATABASE_PASSWORD)@{{ .Values.global.database.gcloud.cloudSqlInternal }}:{{ .Values.global.database.port }}/{{ .Values.global.database.name }}
+            value: postgresql://{{ .Values.global.database.user }}:$(DATABASE_PASSWORD)@{{ .Values.global.database.gcloud.cloudSqlInternal }}:{{ .Values.global.database.port }}/{{ .Values.global.database.name }}
           {{ end }}
           {{ if .Values.global.objectStorage.r2.enabled }}
           - name: R2_OBJECT_STORAGE_ACCOUNT_ID
