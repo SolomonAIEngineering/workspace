@@ -111,7 +111,7 @@ const createHelmCommand = ({ isDryRun }) => {
 
   const replica = replicaConfig[buildType] || replicaConfig.canary;
 
-  const namespace = 'workspace';
+  const namespace = 'production';
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const host = DEPLOY_HOST || CANARY_DEPLOY_HOST;
   const deployCommand = [
