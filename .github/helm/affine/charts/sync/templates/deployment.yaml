@@ -63,10 +63,7 @@ spec:
           - name: REDIS_SERVER_USER
             value: "{{ .Values.global.redis.username }}"
           - name: REDIS_SERVER_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: redis
-                key: redis-password
+            value: "{{ .Values.global.redis.password }}"
           - name: REDIS_SERVER_DATABASE
             value: "{{ .Values.global.redis.database }}"
           - name: AFFINE_SERVER_PORT
