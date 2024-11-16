@@ -42,46 +42,44 @@ const isInternal = buildType === 'internal';
 
 const replicaConfig = {
   stable: {
-    web: 3,
-    graphql: Number(process.env.PRODUCTION_GRAPHQL_REPLICA) || 3,
-    sync: Number(process.env.PRODUCTION_SYNC_REPLICA) || 3,
-    renderer: Number(process.env.PRODUCTION_RENDERER_REPLICA) || 3,
+    web: 1,
+    graphql: Number(process.env.PRODUCTION_GRAPHQL_REPLICA) || 1,
+    sync: Number(process.env.PRODUCTION_SYNC_REPLICA) || 1,
+    renderer: Number(process.env.PRODUCTION_RENDERER_REPLICA) || 1,
   },
   beta: {
-    web: 2,
-    graphql: Number(process.env.BETA_GRAPHQL_REPLICA) || 2,
-    sync: Number(process.env.BETA_SYNC_REPLICA) || 2,
-    renderer: Number(process.env.BETA_RENDERER_REPLICA) || 2,
+    web: 1,
+    graphql: Number(process.env.BETA_GRAPHQL_REPLICA) || 1,
+    sync: Number(process.env.BETA_SYNC_REPLICA) || 1,
+    renderer: Number(process.env.BETA_RENDERER_REPLICA) || 1,
   },
   canary: {
-    web: 2,
-    graphql: 2,
-    sync: 2,
-    renderer: 2,
+    web: 1,
+    graphql: 1,
+    sync: 1,
+    renderer: 1,
   },
 };
 
 const cpuConfig = {
   beta: {
-    web: '300m',
+    web: '100m',
     graphql: '1',
     sync: '1',
-    renderer: '300m',
+    renderer: '100m',
   },
   canary: {
-    web: '300m',
+    web: '100m',
     graphql: '1',
     sync: '1',
-    renderer: '300m',
+    renderer: '100m',
   },
 };
 
 const createHelmCommand = ({ isDryRun }) => {
   const flag = isDryRun ? '--dry-run' : '--atomic';
   const imageTag = `${buildType}-${GIT_SHORT_HASH}`;
-  const redisAndPostgres =
-    isProduction || isBeta || isInternal
-      ? [
+  const redisAndPostgres = [
           `--set-string global.database.url=${DATABASE_URL}`,
           `--set-string global.database.user=${DATABASE_USERNAME}`,
           `--set-string global.database.password=${DATABASE_PASSWORD}`,
@@ -93,7 +91,6 @@ const createHelmCommand = ({ isDryRun }) => {
           `--set-string global.redis.password="${REDIS_PASSWORD}"`,
           `--set        global.redis.enabled=true`,
         ]
-      : [];
   const serviceAnnotations =
     isProduction || isBeta || isInternal
       ? [
