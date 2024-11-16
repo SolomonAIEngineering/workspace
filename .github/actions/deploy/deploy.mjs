@@ -126,7 +126,7 @@ const createHelmCommand = ({ isDryRun }) => {
     `--set-string global.ingress.host="${host}"`,
     `--set        global.objectStorage.r2.enabled=true`,
     `--set-string global.objectStorage.r2.accountId="${R2_ACCOUNT_ID}"`,
-    `--set-string global.objectStorage.r2.accessKeyId="${R2_ACCSES_KEY_ID}"`,
+    `--set-string global.objectStorage.r2.accessKeyId="${R2_ACCESS_KEY_ID}"`,
     `--set-string global.objectStorage.r2.secretAccessKey="${R2_SECRET_ACCESS_KEY}"`,
     `--set-string global.version="${APP_VERSION}"`,
     ...redisAndPostgres,
