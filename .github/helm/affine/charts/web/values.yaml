@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: solomonai/affine-front
   pullPolicy: Always
-  tag: ""
+  tag: "stable"
 
 imagePullSecrets: []
 nameOverride: ""

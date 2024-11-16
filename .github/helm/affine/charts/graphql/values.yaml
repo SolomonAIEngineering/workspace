@@ -2,7 +2,7 @@ replicaCount: 1
 image:
   repository: solomonai/affine-graphql
   pullPolicy: Always
-  tag: latest
+  tag: stable
 
 imagePullSecrets: []
 nameOverride: ''
