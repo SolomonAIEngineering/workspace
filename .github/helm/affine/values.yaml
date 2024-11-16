@@ -10,9 +10,9 @@ global:
     secretName: 'server-private-key'
     privateKey: ''
   database:
-    user: 'postgres'
-    url: 'pg-postgresql'
-    port: '5432'
+    user: 'doadmin'
+    url: 'solomon-ai-postgresql-do-user-14647471-0.b.db.ondigitalocean.com'
+    port: '25061'
     name: 'affine'
     password: ''
     gcloud:
