@@ -3,7 +3,7 @@ replicaCount: 3
 image:
   # the tag is defined as chart appVersion.
   repository: gcr.io/cloud-sql-connectors/cloud-sql-proxy
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 imagePullSecrets: []
 nameOverride: ""

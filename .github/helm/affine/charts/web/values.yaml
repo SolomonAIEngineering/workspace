@@ -1,8 +1,8 @@
 replicaCount: 1
 
 image:
-  repository: ghcr.io/toeverything/affine-front
-  pullPolicy: IfNotPresent
+  repository: solomonai/affine-front
+  pullPolicy: Always
   tag: ""
 
 imagePullSecrets: []
@@ -21,11 +21,10 @@ podSecurityContext:
 
 resources:
   limits:
-    cpu: '500m'
-    memory: 2Gi
+    memory: 512Mi
   requests:
-    cpu: '500m'
-    memory: 2Gi
+    cpu: 100m
+    memory: 128Mi
 
 nodeSelector: {}
 

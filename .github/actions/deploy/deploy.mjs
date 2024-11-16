@@ -114,13 +114,7 @@ const createHelmCommand = ({ isDryRun }) => {
 
   const replica = replicaConfig[buildType] || replicaConfig.canary;
 
-  const namespace = isProduction
-    ? 'production'
-    : isBeta
-      ? 'beta'
-      : isInternal
-        ? 'internal'
-        : 'dev';
+  const namespace = 'workspace';
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const host = DEPLOY_HOST || CANARY_DEPLOY_HOST;
   const deployCommand = [
@@ -132,7 +126,7 @@ const createHelmCommand = ({ isDryRun }) => {
     `--set-string global.ingress.host="${host}"`,
     `--set        global.objectStorage.r2.enabled=true`,
     `--set-string global.objectStorage.r2.accountId="${R2_ACCOUNT_ID}"`,
-    `--set-string global.objectStorage.r2.accessKeyId="${R2_ACCESS_KEY_ID}"`,
+    `--set-string global.objectStorage.r2.accessKeyId="${R2_ACCSES_KEY_ID}"`,
     `--set-string global.objectStorage.r2.secretAccessKey="${R2_SECRET_ACCESS_KEY}"`,
     `--set-string global.version="${APP_VERSION}"`,
     ...redisAndPostgres,
@@ -170,6 +164,9 @@ const createHelmCommand = ({ isDryRun }) => {
     `--timeout 10m`,
     flag,
   ].join(' ');
+
+  console.log("this is the deployment command", deployCommand);
+
   return deployCommand;
 };
 

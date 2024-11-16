@@ -1,8 +1,8 @@
 replicaCount: 1
 image:
-  repository: ghcr.io/toeverything/affine-graphql
-  pullPolicy: IfNotPresent
-  tag: ''
+  repository: solomonai/affine-graphql
+  pullPolicy: Always
+  tag: latest
 
 imagePullSecrets: []
 nameOverride: ''
@@ -26,9 +26,11 @@ podSecurityContext:
   fsGroup: 2000
 
 resources:
+  limits:
+    memory: 512Mi
   requests:
-    cpu: '4'
-    memory: 4Gi
+    cpu: 100m
+    memory: 128Mi
 
 probe:
   initialDelaySeconds: 20
