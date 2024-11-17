@@ -1,5 +1,8 @@
 import { execSync } from 'node:child_process';
 
+// Print all environment variables
+console.log('Environment variables:', process.env);
+
 const {
   APP_VERSION,
   BUILD_TYPE,
