@@ -25,8 +25,8 @@ global:
       proxyPort: '5432'
   redis:
     enabled: true
-    host: 'solomon-ai-redis-cluster-do-user-14647471-0.b.db.ondigitalocean.com'
-    port: '25061'
+    host: 'amazing-puma-22700.upstash.io'
+    port: '6379'
     username: 'default'
     password: ''
     database: 0
