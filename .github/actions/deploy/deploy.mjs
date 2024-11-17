@@ -77,92 +77,88 @@ const cpuConfig = {
 };
 
 const createHelmCommand = ({ isDryRun }) => {
+  if (!DATABASE_URL || !DATABASE_USERNAME || !DATABASE_PASSWORD || !DEPLOY_HOST) {
+    throw new Error('Missing required environment variables for deployment');
+  }
+
   const flag = isDryRun ? '--dry-run' : '--atomic';
   const imageTag = `${buildType}-${GIT_SHORT_HASH}`;
+
   const redisAndPostgres = [
-          `--set-string global.database.url=${DATABASE_URL}`,
-          `--set-string global.database.user=${DATABASE_USERNAME}`,
-          `--set-string global.database.password=${DATABASE_PASSWORD}`,
-          `--set-string global.database.name=${DATABASE_NAME}`,
-          `--set-string global.database.port="${DATABASE_PORT}"`,
-          `--set-string global.redis.host="${REDIS_HOST}"`, // redis configurations
-          `--set-string global.redis.port="${REDIS_PORT}"`,
-          `--set-string global.redis.username="${REDIS_USERNAME}"`,
-          `--set-string global.redis.password="${REDIS_PASSWORD}"`,
-          `--set        global.redis.enabled=true`,
-        ]
+    `--set-string global.database.url="${DATABASE_URL}"`,
+    `--set-string global.database.user="${DATABASE_USERNAME}"`,
+    `--set-string global.database.password="${DATABASE_PASSWORD}"`,
+    `--set-string global.database.name="${DATABASE_NAME}"`,
+    `--set-string global.database.port="${DATABASE_PORT}"`,
+    `--set-string global.redis.host="${REDIS_HOST}"`,
+    `--set-string global.redis.port="${REDIS_PORT}"`,
+    `--set-string global.redis.username="${REDIS_USERNAME}"`,
+    `--set-string global.redis.password="${REDIS_PASSWORD}"`,
+    `--set global.redis.enabled=true`,
+  ];
+
   const serviceAnnotations =
     isProduction || isBeta || isInternal
       ? [
-          `--set-json   web.service.annotations=\"{ \\"cloud.google.com/neg\\": \\"{\\\\\\"ingress\\\\\\": true}\\" }\"`,
-          `--set-json   graphql.service.annotations=\"{ \\"cloud.google.com/neg\\": \\"{\\\\\\"ingress\\\\\\": true}\\" }\"`,
-          `--set-json   sync.service.annotations=\"{ \\"cloud.google.com/neg\\": \\"{\\\\\\"ingress\\\\\\": true}\\" }\"`,
+          `--set-json web.service.annotations="{\\"cloud.google.com/neg\\": \\"{\\\\\\"ingress\\\\\\": true}\\"}"`,
+          `--set-json graphql.service.annotations="{\\"cloud.google.com/neg\\": \\"{\\\\\\"ingress\\\\\\": true}\\"}"`,
+          `--set-json sync.service.annotations="{\\"cloud.google.com/neg\\": \\"{\\\\\\"ingress\\\\\\": true}\\"}"`,
         ]
       : [];
 
   const cpu = cpuConfig[buildType];
   const resources = cpu
     ? [
-        `--set        web.resources.requests.cpu="${cpu.web}"`,
-        `--set        graphql.resources.requests.cpu="${cpu.graphql}"`,
-        `--set        sync.resources.requests.cpu="${cpu.sync}"`,
+        `--set web.resources.requests.cpu="${cpu.web}"`,
+        `--set graphql.resources.requests.cpu="${cpu.graphql}"`,
+        `--set sync.resources.requests.cpu="${cpu.sync}"`,
       ]
     : [];
 
   const replica = replicaConfig[buildType] || replicaConfig.canary;
-
   const namespace = 'production';
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const host = DEPLOY_HOST || CANARY_DEPLOY_HOST;
+
   const deployCommand = [
     `helm upgrade --install affine .github/helm/affine`,
-    `--namespace  ${namespace}`,
+    `--namespace ${namespace}`,
     `--set-string global.app.buildType="${buildType}"`,
-    `--set        global.ingress.enabled=true`,
-    `--set-json   global.ingress.annotations=\"{ \\"kubernetes.io/ingress.class\\": \\"gce\\", \\"kubernetes.io/ingress.allow-http\\": \\"true\\", \\"kubernetes.io/ingress.global-static-ip-name\\": \\"${STATIC_IP_NAME}\\" }\"`,
+    `--set global.ingress.enabled=true`,
+    `--set-json global.ingress.annotations="{\\"kubernetes.io/ingress.class\\": \\"gce\\", \\"kubernetes.io/ingress.allow-http\\": \\"true\\", \\"kubernetes.io/ingress.global-static-ip-name\\": \\"${STATIC_IP_NAME}\\"}"`,
     `--set-string global.ingress.host="${host}"`,
-    `--set        global.objectStorage.r2.enabled=true`,
+    `--set global.objectStorage.r2.enabled=true`,
     `--set-string global.objectStorage.r2.accountId="${R2_ACCOUNT_ID}"`,
     `--set-string global.objectStorage.r2.accessKeyId="${R2_ACCESS_KEY_ID}"`,
     `--set-string global.objectStorage.r2.secretAccessKey="${R2_SECRET_ACCESS_KEY}"`,
     `--set-string global.version="${APP_VERSION}"`,
     ...redisAndPostgres,
-    `--set        web.replicaCount=${replica.web}`,
+    `--set web.replicaCount=${replica.web}`,
     `--set-string web.image.tag="${imageTag}"`,
-    `--set        graphql.replicaCount=${replica.graphql}`,
+    `--set graphql.replicaCount=${replica.graphql}`,
     `--set-string graphql.image.tag="${imageTag}"`,
-    `--set        graphql.app.host=${host}`,
-    `--set        graphql.app.captcha.enabled=true`,
+    `--set graphql.app.host="${host}"`,
+    `--set graphql.app.captcha.enabled=true`,
+    `--set-string graphql.app.metrics.customerIo.token="${METRICS_CUSTOMER_IO_TOKEN}"`,
     `--set-string graphql.app.captcha.turnstile.secret="${CAPTCHA_TURNSTILE_SECRET}"`,
-    `--set        graphql.app.copilot.enabled=true`,
+    `--set graphql.app.copilot.enabled=true`,
     `--set-string graphql.app.copilot.openai.key="${COPILOT_OPENAI_API_KEY}"`,
     `--set-string graphql.app.copilot.fal.key="${COPILOT_FAL_API_KEY}"`,
     `--set-string graphql.app.copilot.unsplash.key="${COPILOT_UNSPLASH_API_KEY}"`,
     `--set-string graphql.app.mailer.sender="${MAILER_SENDER}"`,
     `--set-string graphql.app.mailer.user="${MAILER_USER}"`,
     `--set-string graphql.app.mailer.password="${MAILER_PASSWORD}"`,
-    `--set-string graphql.app.oauth.google.enabled=true`,
+    `--set graphql.app.oauth.google.enabled=true`,
     `--set-string graphql.app.oauth.google.clientId="${AFFINE_GOOGLE_CLIENT_ID}"`,
     `--set-string graphql.app.oauth.google.clientSecret="${AFFINE_GOOGLE_CLIENT_SECRET}"`,
     `--set-string graphql.app.payment.stripe.apiKey="${STRIPE_API_KEY}"`,
     `--set-string graphql.app.payment.stripe.webhookKey="${STRIPE_WEBHOOK_KEY}"`,
-    `--set        graphql.app.metrics.enabled=true`,
-    `--set-string graphql.app.metrics.customerIo.token="${METRICS_CUSTOMER_IO_TOKEN}"`,
-    `--set        graphql.app.experimental.enableJwstCodec=${namespace === 'dev'}`,
-    `--set        graphql.app.features.earlyAccessPreview=false`,
-    `--set        graphql.app.features.syncClientVersionCheck=true`,
-    `--set        sync.replicaCount=${replica.sync}`,
-    `--set-string sync.image.tag="${imageTag}"`,
-    `--set-string renderer.image.tag="${imageTag}"`,
-    `--set        renderer.app.host=${host}`,
-    `--set        renderer.replicaCount=${replica.renderer}`,
     ...serviceAnnotations,
     ...resources,
     `--timeout 10m`,
     flag,
   ].join(' ');
 
-  console.log("this is the deployment command", deployCommand);
+  console.log('Helm Command:', deployCommand);
 
   return deployCommand;
 };
@@ -170,7 +166,6 @@ const createHelmCommand = ({ isDryRun }) => {
 const output = execSync(createHelmCommand({ isDryRun: true }), {
   encoding: 'utf-8',
   stdio: ['inherit', 'pipe', 'inherit'],
-  shell: true,
 });
 const templates = output
   .split('---')
@@ -181,5 +176,4 @@ console.log(templates);
 execSync(createHelmCommand({ isDryRun: false }), {
   encoding: 'utf-8',
   stdio: 'inherit',
-  shell: true,
 });
