@@ -1,8 +1,5 @@
 import { execSync } from 'node:child_process';
 
-// Print all environment variables
-console.log('Environment variables:', process.env);
-
 const {
   APP_VERSION,
   BUILD_TYPE,
@@ -173,6 +170,7 @@ const createHelmCommand = ({ isDryRun }) => {
 const output = execSync(createHelmCommand({ isDryRun: true }), {
   encoding: 'utf-8',
   stdio: ['inherit', 'pipe', 'inherit'],
+  shell: true,
 });
 const templates = output
   .split('---')
@@ -183,4 +181,5 @@ console.log(templates);
 execSync(createHelmCommand({ isDryRun: false }), {
   encoding: 'utf-8',
   stdio: 'inherit',
+  shell: true,
 });
