@@ -23,7 +23,7 @@ import {
   useState,
 } from 'react';
 
-import { AppFallback } from '../../components';
+import { AppFallback } from '../../components/app-fallback';
 import { WorkspaceDialogs } from '../../dialogs';
 
 // TODO(@forehalo): reuse the global context with [core/electron]
