@@ -370,7 +370,7 @@ export class UserSubscriptionResolver {
       };
     }
 
-    return this.db.userSubscription.findUnique({
+    const subscription = await this.db.userSubscription.findUnique({
       where: {
         userId_plan: {
           userId: user.id,
@@ -379,6 +379,18 @@ export class UserSubscriptionResolver {
         status: SubscriptionStatus.Active,
       },
     });
+
+    if (
+      subscription &&
+      subscription.variant &&
+      ![SubscriptionVariant.EA, SubscriptionVariant.Onetime].includes(
+        subscription.variant as SubscriptionVariant
+      )
+    ) {
+      subscription.variant = null;
+    }
+
+    return subscription;
   }
 
   @ResolveField(() => [UserSubscriptionType])
@@ -390,12 +402,25 @@ export class UserSubscriptionResolver {
       throw new AccessDenied();
     }
 
-    return this.db.userSubscription.findMany({
+    const subscriptions = await this.db.userSubscription.findMany({
       where: {
         userId: user.id,
         status: SubscriptionStatus.Active,
       },
     });
+
+    subscriptions.forEach(subscription => {
+      if (
+        subscription.variant &&
+        ![SubscriptionVariant.EA, SubscriptionVariant.Onetime].includes(
+          subscription.variant as SubscriptionVariant
+        )
+      ) {
+        subscription.variant = null;
+      }
+    });
+
+    return subscriptions;
   }
 
   @ResolveField(() => [UserInvoiceType])

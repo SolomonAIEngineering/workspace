@@ -1,0 +1,26 @@
+{
+  "name": "@affine/nbstore",
+  "type": "module",
+  "version": "0.18.0",
+  "private": true,
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./op": "./src/op/index.ts",
+    "./idb": "./src/impls/idb/index.ts",
+    "./idb/v1": "./src/impls/idb/v1/index.ts"
+  },
+  "dependencies": {
+    "@toeverything/infra": "workspace:*",
+    "eventemitter2": "^6.4.9",
+    "lodash-es": "^4.17.21",
+    "rxjs": "^7.8.1",
+    "yjs": "patch:yjs@npm%3A13.6.18#~/.yarn/patches/yjs-npm-13.6.18-ad0d5f7c43.patch"
+  },
+  "devDependencies": {
+    "idb": "^8.0.0"
+  },
+  "peerDependencies": {
+    "idb": "^8.0.0"
+  }
+}
